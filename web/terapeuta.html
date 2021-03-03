@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Terapeuta SR-IoT</title>
+        <link rel="icon" href="Iconos/logSRiot.ico">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="Css/StyleAdmin.css" rel="stylesheet" type="text/css"/>
+        <script src="Js/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script src="https://kit.fontawesome.com/0e3a01c195.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="contendor-menu">
+            <div class="imagen">
+                <img src="Imagenes/logoapp.png" width="50" height="50">
+            </div>
+            <div class="imagen">
+                <input type="checkbox" id="check">
+                <label for="check" class="icon-menu"><i class="fas fa-bars"></i> MEN&Uacute;</label>
+                <nav class="menu-deplegable">
+                    <ul>
+                        <li id="abririformacion"><i class="fas fa-file-alt"></i> Mi Informaci&oacute;n</li>
+                        <li id="abrirpaciente"><i class="fas fa-user-injured"></i> Pacientes</li>
+                        <li id="abrirpreescripciones"><i class="fas fa-notes-medical"></i> Preescripciones</li>
+                        <li id="abrirreporte"><i class="fas fa-chart-pie"></i> Reporte</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="menu">
+                <ul class="list">
+                    <li class="opt"><a class="adm"><i class="fas fa-user-md"></i> TERAPEUTA</a></li>
+                    <li id="logout" class="opt"><a class="sub-opt"><i class="fas fa-times-circle"></i> Cerrar Sesi&oacute;n</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="contdatos" class="contenedor-datos">
+            <div class="ident-div"><h4>PREESCRIPCIONES</h4></div>
+
+            <div class="contenedor-add-filter">
+                <div class="box">
+                    <form>
+                        <input type="text" id="filtrar" name="filtrar" class="box-text box-text-search" placeholder="Filtro de busqueda">
+                        <button type="submit" class="box-buton buton-search"><i class="fas fa-search"></i> Buscar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="contenedor-table">
+                <table>
+                    <thead>
+                        <tr><th>Paciente</th><th>Dispositivo</th><th>Fecha</th><th>Terapia</th><th>Descripci&oacute;n</th><th>Estado</th><th>Acciones</th></tr>
+                    </thead>
+                    <tbody id="loaddatos">
+                        <!--<tr>
+                            <th>1205003256</th><th>Barrios Mosquera Juan Alberto</th><th>12/02/2010</th><th>Pelota</th><th>Activo</th>
+                            <th><button id="btn-abrir-popup" class="box-buton buton-edit"><i class="fas fa-check"></i> Editar</button>
+                                <button class="box-buton buton-add"><i class="fas fa-check"></i> Realizar</button>
+                            </th>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="overlay" id="overlay">
+                <div class="popup popup-prescripcion" id="popup">
+                    <a id="btn-cerrar-popup" class="btn-cerrar-popup">X</a>
+                    <h3>FORMULARIO PARA EDITAR DATOS DE PRESCRIPCIONES</h3>
+                    <div class="contenedor-add-filter">
+                        <div class="box">
+                            <form>
+                                <input type="text" id="filtrarpres" name="filtrarpres" class="box-text box-text-search" placeholder="Filtro de busqueda de dispositivos">
+                                <button class="box-buton buton-search"><i class="fas fa-search"></i> Buscar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="contenedor-table">
+                        <table>
+                            <thead>
+                                <tr><th>MAC</th><th>Dispositivo</th><th>Acci&oacute;n</th>
+                            </thead>
+                            <tbody id="loaddevices">
+                                <!--<tr>
+                                    <th>1205003256</th><th>Botella</th>
+                                    <th><button class="box-buton buton-add"><i class="fas fa-check"></i> Escoger</button>
+                                    </th>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <form id="pres-form-edit" action="" autocomplete="off">
+
+                        <div class="contenedor-inputs">
+                            <input type="text" id="upmac" class="box-text box-text-miinfo" maxlength="20" placeholder="Dispositivo">
+                            <input type="date" id="upfecha" class="box-text box-text-miinfo" placeholder="Fecha a realizar">
+                            <input type="text" id="uptipoterapia" class="box-text box-text-miinfo" onkeypress="return SoloLetras(event)" maxlength="50" placeholder="tipo de terapia">
+                            <input type="text" id="upcomentario" class="box-text box-text-miinfo" onkeypress="return SoloLetras(event)" maxlength="100" placeholder="Descripcion de la terapia">
+                        </div>
+
+                        <button id="btnupdatepres" class="box-buton buton-edit buton-miinfo"><i class="fas fa-edit"></i> Modificar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+        <!--<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>-->
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries -->
+        <!--<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>-->
+        <script src="Js/appConfig.js" type="text/javascript"></script>
+        <script src="Js/terapeuta.js" type="text/javascript"></script>
+        <script src="Js/validations.js" type="text/javascript"></script>
+    </body>
+</html>

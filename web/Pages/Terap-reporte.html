@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Terapeuta SR-IoT</title>
+        <link rel="icon" href="../Iconos/logSRiot.ico">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../Js/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script src="https://kit.fontawesome.com/0e3a01c195.js" crossorigin="anonymous"></script>
+        <link href="../Css/StyleAdmin.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body onload="getPrescriptionFiltrado()">
+        <div class="contendor-menu">
+            <div class="imagen">
+                <img src="../Imagenes/logoapp.png" width="50" height="50">
+            </div>
+            <div class="imagen">
+                <input type="checkbox" id="check">
+                <label for="check" class="icon-menu"><i class="fas fa-bars"></i> MEN&Uacute;</label>
+                <nav class="menu-deplegable">
+                    <ul>
+                        <li id="abririformacion"><i class="fas fa-file-alt"></i> Mi Informaci&oacute;n</li>
+                        <li id="abrirpaciente"><i class="fas fa-user-injured"></i> Pacientes</li>
+                        <li id="abrirpreescripciones"><i class="fas fa-notes-medical"></i> Preescripciones</li>
+                        <li id="abrirreporte"><i class="fas fa-chart-pie"></i> Reporte</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="menu">
+                <ul class="list">
+                    <li class="opt"><a class="adm"><i class="fas fa-user-md"></i> TERAPEUTA</a></li>
+                    <li id="logout" class="opt"><a class="sub-opt"><i class="fas fa-times-circle"></i> Cerrar Sesi&oacute;n</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="contdatos" class="contenedor-datos">
+            <div class="ident-div"><h4>REPORTES</h4></div>
+            
+            <div class="contenedor-add-filter">
+                <div class="box">
+                    <form>
+                        <input type="text" id="filtrar" name="filtrar" class="box-text box-text-search" placeholder="Filtro de busqueda">
+                        <button type="submit" class="box-buton buton-search" onclick="getPrescription()"><i class="fas fa-search"></i> Buscar</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="container" id='invoice'>
+                <table class="table" id="tableButtons">
+                    <thead>                      
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><button id="btnVisualizar" type="button" class="box-buton buton-edit" onclick="getPrescription()">Visualize All</button> <button id="btnLimpiar" type="button" class="box-buton buton-edit" onclick="eliminarFila()">Clean up</button> <button id="btnPDF" type="button" class="box-buton buton-edit" onclick='getPDF()'>Download pdf</button></th>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table" id="contentTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Id Pacient</th>
+                            <th scope="col">Id Device</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Iterations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div> 
+
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+        <!--<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>-->
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries -->
+        <!--<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>-->
+        <script src="../Js/appConfig.js" type="text/javascript"></script>
+        <script src="../Js/Terap-reporte.js" type="text/javascript"></script>
+    </body>
+</html>
